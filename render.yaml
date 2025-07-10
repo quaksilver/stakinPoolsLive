@@ -1,8 +1,9 @@
-services:
+  services:
   - type: web
     name: cardano-backend
     env: python
-    buildCommand: ""
+    buildCommand: "pip install -r requirements.txt"
     startCommand: "python BackEnd/weCruise.py"
     autoDeploy: true
+
 
