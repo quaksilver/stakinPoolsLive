@@ -1,19 +1,16 @@
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify, render_template
 from logic import get_pool_rankings
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return send_from_directory(app.static_folder, "frontEnd.html")
+    return render_template("frontEnd.html")  # or 'index.html' if you rename
 
 @app.route("/rankings")
 def rankings():
-    return jsonify(get_pool_rankings())
-
-@app.route("/health")
-def health():
-    return "OK", 200
+    data = get_pool_rankings()
+    return jsonify(data)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)
