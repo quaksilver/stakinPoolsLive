@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stake Pool Rankings</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    table { border-collapse: collapse; width: 80%; margin: auto; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    th { background-color: #333; color: white; }
+    h1 { text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>Live Cardano Pool Rankings</h1>
+  <table id="rankingTable">
+    <thead>
+      <tr><th>Rank</th><th>Pool</th><th>Total Rewards (₳)</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    async function fetchRankings() {
+      const res = await fetch("/rankings");
+      const data = await res.json();
+      const tbody = document.querySelector("#rankingTable tbody");
+      tbody.innerHTML = "";
+
+      data.forEach((pool, index) => {
+        const row = `<tr>
+          <td>${index + 1}</td>
+          <td>${pool.name}</td>
+          <td>${pool.rewards.toFixed(6)}</td>
+        </tr>`;
+        tbody.insertAdjacentHTML("beforeend", row);
+      });
+    }
+
+    fetchRankings();
+    setInterval(fetchRankings, 60000); // refresh every 60 seconds
+  </script>
+</body>
+</html>

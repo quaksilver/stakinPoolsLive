@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: cardano-backend
+    env: python
+    buildCommand: ""
+    startCommand: "python BackEnd/weCruise.py"
+    autoDeploy: true
+
