@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from BackEnd.logic import get_pool_rankings
+from logic import get_pool_rankings
 
 app = Flask(__name__)
 
