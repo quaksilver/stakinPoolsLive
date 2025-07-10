@@ -4,7 +4,7 @@ from logic import get_pool_rankings
 app = Flask(__name__, static_folder='static')
 
 @app.route("/")
-def serve_frontend():
+def index():
     return send_from_directory(app.static_folder, "frontEnd.html")
 
 @app.route("/rankings")
@@ -16,4 +16,4 @@ def health():
     return "OK", 200
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
